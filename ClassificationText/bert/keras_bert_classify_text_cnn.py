@@ -248,7 +248,7 @@ def train():
     _, labels_dev, input_ids_dev, input_masks_dev, input_segments_dev = classify_pair_corpus_webank(bert_model, path_webank_dev)
     # questions_test, labels_test, input_ids_test, input_masks_test, _ = classify_pair_corpus_webank(bert_model, path_webank_test)
     print("process corpus ok!")
-    bert_model.fit([input_ids_train, input_masks_train], labels_train, [input_ids_dev, input_masks_dev], labels_dev)
+    bert_model.fit([input_ids_train, input_segments_train], labels_train, [input_ids_dev, input_segments_dev], labels_dev)
     print("bert_model fit ok!")
 
 
