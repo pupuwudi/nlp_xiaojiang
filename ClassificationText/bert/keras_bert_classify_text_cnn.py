@@ -56,7 +56,7 @@ def attention(inputs, single_attention_vector=False):
 class BertTextCnnModel():
     def __init__(self):
         # logger.info("BertBiLstmModel init start!")
-        print("BertBiLstmModel init start!")
+        print("BertTextCnnModel init start!")
         self.config_path, self.checkpoint_path, self.dict_path = config_name, ckpt_name, vocab_file
         self.max_seq_len, self.filters, self.embedding_dim, self.keep_prob = args.max_seq_len, args.filters, args.embedding_dim, args.keep_prob
         self.activation, self.label = args.activation, args.label
@@ -69,11 +69,12 @@ class BertTextCnnModel():
 
         self.tokenizer = Tokenizer(self.token_dict)
         # 这里模型可以选text-rnn、r-cnn或者是avt-cnn
-        # self.build_model_text_cnn()
+        self.build_model_text_cnn()
         # self.build_model_r_cnn()
-        self.build_model_avt_cnn()
+        # self.build_model_avt_cnn()
+        self.model.summary()
         # logger.info("BertBiLstmModel init end!")
-        print("BertBiLstmModel init end!")
+        print("BertTextCnnModel init end!")
 
     def build_model_text_cnn(self):
         #########    text-cnn    #########
@@ -243,8 +244,8 @@ def train():
     # 1. trian
     bert_model = BertTextCnnModel()
     bert_model.compile_model()
-    _, labels_train, input_ids_train, input_masks_train, _ = classify_pair_corpus_webank(bert_model, path_webank_train)
-    _, labels_dev, input_ids_dev, input_masks_dev, _ = classify_pair_corpus_webank(bert_model, path_webank_dev)
+    _, labels_train, input_ids_train, input_masks_train, input_segments_train = classify_pair_corpus_webank(bert_model, path_webank_train)
+    _, labels_dev, input_ids_dev, input_masks_dev, input_segments_dev = classify_pair_corpus_webank(bert_model, path_webank_dev)
     # questions_test, labels_test, input_ids_test, input_masks_test, _ = classify_pair_corpus_webank(bert_model, path_webank_test)
     print("process corpus ok!")
     bert_model.fit([input_ids_train, input_masks_train], labels_train, [input_ids_dev, input_masks_dev], labels_dev)

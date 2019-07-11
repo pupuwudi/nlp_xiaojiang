@@ -1,6 +1,6 @@
 # bi-lstm
 return_sequences = True
-use_cudnn_cell = True
+use_cudnn_cell = False
 use_lstm = True
 
 loss = 'categorical_crossentropy'
