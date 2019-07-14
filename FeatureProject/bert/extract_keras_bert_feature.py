@@ -114,7 +114,7 @@ class KerasBertVector():
         # 相当于pool，采用的是https://github.com/terrifyzhao/bert-utils/blob/master/graph.py
         mul_mask = lambda x, m: x * np.expand_dims(m, axis=-1)
         masked_reduce_mean = lambda x, m: np.sum(mul_mask(x, m), axis=1) / (np.sum(m, axis=1, keepdims=True) + 1e-9)
-        pooled = masked_reduce_mean(predicts[0][-1], input_masks)
+        pooled = masked_reduce_mean(predicts, input_masks)
         pooled = pooled.tolist()
         print('bert:', pooled)
         return pooled

@@ -210,7 +210,7 @@ class BertTextCnnModel():
         label_preds = []
         for questions_pair in questions:
             input_ids, input_masks, input_type_ids = self.process_pair([questions_pair])
-            label_pred = self.model.predict([input_ids, input_masks], batch_size=1)
+            label_pred = self.model.predict([input_ids, input_type_ids], batch_size=1)
             label_preds.append(label_pred[0])
         return label_preds
 
