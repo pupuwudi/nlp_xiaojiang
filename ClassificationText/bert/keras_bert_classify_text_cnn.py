@@ -288,8 +288,8 @@ def predict():
 
 
 if __name__ == "__main__":
-    train()
-    # tet()
+    # train()
+    tet()
     # predict()
 
 # text cnn, real stop
